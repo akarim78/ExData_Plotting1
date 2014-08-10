@@ -14,15 +14,16 @@ rm(power_data)
 ## wkdays<-weekdays(data$Date)
 ##head(data$Time)
 data$DateTime <- paste(data$Date,data$Time)
-##data$DateTime <- strptime(data$DateTime, "%Y-%m-%d %H:%M:%S")
 data$DateTime <- as.POSIXct(data$DateTime)
-##head(data$DateTime)
-##class(data$DateTime)
+#data$DateTime <- strptime(data$DateTime, "%Y-%m-%d %H:%M:%S")
 
-## Plot 2
-plot(data$Global_active_power~data$DateTime, type="l", ylab="Global Active Power (kilowatts)", xlab="")
+## Plot 3
+plot(data$Sub_metering_1~data$DateTime, type="l", ylab="Energy sub metering", xlab="")
+lines(data$Sub_metering_2~data$DateTime, col='Red')
+lines(data$Sub_metering_3~data$DateTime, col='Blue')
+legend("topright", col=c("black", "red", "blue"), lty=1, lwd=2, legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
 ## Save file
-dev.copy(png, file="plot2.png", height=480, width=480)
+dev.copy(png, file="plot3.png", height=480, width=480)
 dev.off()
-
 
